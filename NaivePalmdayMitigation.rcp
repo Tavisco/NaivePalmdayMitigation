@@ -1,0 +1,48 @@
+DATA "code" ID 1000 "MyDateTemplateToAscii.bin"
+DATA "code" ID 1001 "MySelectDay.bin"
+
+// Trap DateTemplateToAscii
+TRAP 1000 0xA3CD
+TRAP 1001 0xA2D0
+
+// Titel im Hack-Manager
+APPLICATIONICONNAME 3000 "Naive PalmDay Mitigation"
+
+// Version
+VERSION ID 1 "1.0"
+
+// Info-Dialog
+FORM ID 3000  AT ( 2 2 156 156 )
+	MODAL
+	HELPID 3000
+	DEFAULTBTNID 3009
+BEGIN
+	TITLE "About"
+	LABEL "Naive PalmDay Mitigation" 3001 AT (CENTER@80 20) FONT 7
+	LABEL "Just a naive attempt to buy some" 3002 AT (5 PREVBOTTOM+5)
+	LABEL "more time until PalmDay." 3003 AT (PREVLEFT PREVBOTTOM)
+	LABEL "It may cause crashes." 3004 AT (PREVLEFT PREVBOTTOM)
+	LABEL "It will NOT work everywhere." 3005 AT (PREVLEFT PREVBOTTOM)
+	LABEL "*Read* the (i) at the top." 3006 AT (PREVLEFT PREVBOTTOM)
+	LABEL "Made by Tavisco in 2024" 3007 AT (PREVLEFT PREVBOTTOM + 10)
+	LABEL "https://palm.tavisco.dev" 3008 AT (PREVLEFT PREVBOTTOM)
+	BUTTON "OK" 3009 AT (6 140 35 AUTO)
+	LABEL "V 1.0" 3010 AT (PREVLEFT + 126 PREVBOTTOM - 11)
+END
+
+// String for Info-Dialog
+STRING ID 3000
+"As of now, this patch only affects Palm OS >= 3.5 and < 5.\n\n"\
+"First and foremost, this is a mitigation, not a fix.\n"\ 
+"It works by cosmetically changing the year "\
+"that shows up on the DateTemplateToAscii() function."\
+" It actually don't let Palm OS counts after PalmDay, BUT"\
+" using a clever trick, it shows dates after that by"\
+" just adding 56 to whatever year it was previously drawing.\n\n"\
+"It also patches the SelectDay modal to tweak the max "\
+"year that is possible to select.\n\n"\
+"This approach has a serious drawback though:\n"\
+"If you use the patch on a device that already has data,"\
+" all the entries that already exists will be in the wrong year"\
+" so it's best used on a fresh device. Just disable this hack to"\
+" see the 'normal' year. No harm at all using it." 

@@ -1,0 +1,6 @@
+emu_session.psf
+*.prc
+*.bin
+*.o
+*.elf
+.vscode/
